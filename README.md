@@ -92,5 +92,3 @@ The main structure of the project is as follows:
 ## Author
 **Kevin Jones**
 **Year: 2024**
-
-..............................
