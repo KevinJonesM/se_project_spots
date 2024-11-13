@@ -12,7 +12,7 @@
 }
 
 .card__title {
-  font-family: 'Poppins', sans-serif;
+  font-family: '"Poppins"', Arial, sans-serif;
   font-size: 20px;
   font-weight: 500;
   color: #212121;
@@ -20,6 +20,7 @@
   white-space: nowrap;
   overflow: hidden;
   margin: 0 0 4px;
+  max-width: 350px;
 }
 
 .card__content {
@@ -52,5 +53,6 @@
 
   .card__title {
     font-size: 16px;
+    max-width: 250px;
   }
 }
