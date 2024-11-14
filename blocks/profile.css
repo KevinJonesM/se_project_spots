@@ -18,7 +18,7 @@
   border-radius: 8px;
   background-color: #212121;
   color: #FFFFFF;
-  font-family: '"Poppins"', Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   border: none;
@@ -47,7 +47,7 @@
 .profile__edit-btn {
   display: flex;
   margin-top: auto;
-  font-family: '"Poppins"', Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #212121;
@@ -64,7 +64,7 @@
 
 .profile__name {
   margin: 0 0 12px;
-  font-family: '"Poppins"', Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   font-size: 32px;
   font-weight: 500;
   line-height: 1;
@@ -79,7 +79,7 @@
 
 .profile__description {
   margin: 0;
-  font-family: '"Poppins"', Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
