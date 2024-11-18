@@ -73,7 +73,7 @@ The main structure of the project is as follows:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/your-username/spots.git
+   git clone https://github.com/KevinJonesM/se_project_spots.git
 
 ## Usage
 - **Profile**: View your profile name and description. Click "Edit Profile" to simulate profile editing (functionality to be implemented).
