@@ -12,7 +12,6 @@
 
   <!-- Style CSS -->
   <link rel="stylesheet" href="pages/index.css" />
-
 </head>
 
 <body>
@@ -32,11 +31,11 @@
         <div class="profile__column">
           <h1 class="profile__name">Bessie Coleman</h1>
           <p class="profile__description">Civil Aviator</p>
-          <button type="button" class="profile__edit-btn">
+          <button type="button" class="profile__edit-btn" aria-label="Edit Profile">
             <img src="icons/pencil.svg" alt="Edit Profile"> Edit Profile
           </button>
         </div>
-        <button type="button" class="profile__add-btn">
+        <button type="button" class="profile__add-btn" aria-label="Add New Post">
           <img src="icons/plus.svg" alt="New Post" class="profile__add-icon"> New Post
         </button>
       </section>
@@ -46,11 +45,12 @@
         <ul class="cards__list">
           <template id="card-template">
             <li class="card">
-              <img src="" alt="" class="card__image">
+              <img src="" alt="" class="card__image" aria-label="Open image preview">
               <div class="card__content">
                 <h2 class="card__title"></h2>
-                <button type="button" class="card__like-btn"></button>
+                <button type="button" class="card__like-btn" aria-label="Like card"></button>
               </div>
+              <button type="button" class="card__delete-btn" aria-label="Delete card"></button>
             </li>
           </template>
         </ul>
@@ -62,26 +62,53 @@
       <p class="footer__copyright">2024 &copy; Spots</p>
     </footer>
 
-    <!-- Modal -->
-   <div class="modal" id="edit-profile-modal">
-    <div class="modal__container">
-      <button type="button" class="modal__close-btn"></button>
-      <h2 class="modal__title">Edit Profile</h2>
-      <form name="edit-profile" class="modal__form">
-        <label for="profile-name-input" class="modal__label">
-          Name
-          <input id="profile-name-input" type="text" class="modal__input" placeholder="Type your name">
-        </label>
-        <label for="profile-description-input" class="modal__label">
-          Description
-          <input id="profile-description-input" type="text" class="modal__input" placeholder="Describe yourself">
-        </label>
-        <button type="submit" class="modal__submit-btn">Save</button>
-      </form>
+    <!-- Modal: Edit Profile -->
+    <div class="modal" id="edit-profile-modal" aria-label="Edit Profile Modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
+        <h2 class="modal__title">Edit Profile</h2>
+        <form id="modal__form">
+          <label for="profile-name-input" class="modal__label">
+            Name
+            <input id="profile-name-input" type="text" class="modal__input" placeholder="Type your name" aria-label="Edit profile name">
+          </label>
+          <label for="profile-description-input" class="modal__label">
+            Description
+            <input id="profile-description-input" type="text" class="modal__input" placeholder="Describe yourself" aria-label="Edit profile description">
+          </label>
+          <button type="submit" class="modal__submit-btn" aria-label="Save profile changes">Save</button>
+        </form>
+      </div>
     </div>
-   </div>
 
-  </div>
+    <!-- Modal: Add Card -->
+    <div class="modal" id="add-card-modal" aria-label="New Post Modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
+        <h2 class="modal__title">New Post</h2>
+        <form id="add-card-form">
+          <label for="add-card-link-input" class="modal__label">
+            Image Link
+            <input id="add-card-link-input" type="url" class="modal__input" placeholder="Paste a link to the picture" aria-label="Image link">
+          </label>
+          <label for="add-card-caption-input" class="modal__label">
+            Caption
+            <input id="add-card-caption-input" type="text" class="modal__input" placeholder="Type your caption" aria-label="Caption">
+          </label>
+          <button type="submit" class="modal__submit-btn" aria-label="Add new post">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Preview Picture -->
+    <div class="modal modal_preview" id="preview-modal" aria-label="Preview Picture Modal">
+      <div class="modal__container modal__container_type_preview">
+        <button type="button" class="modal__close_type_preview" aria-label="Close modal"></button>
+        <img src="#" alt="Preview" class="modal__image">
+        <p class="modal__caption"></p>
+      </div>
+    </div>
+
   <script defer src="./scripts/index.js"></script>
 </body>
 </html>
