@@ -55,10 +55,12 @@
 .card__like-button_liked {
   background-image: url("../icons/Like-icon-liked.svg");
   opacity: 1;
+  background-color: transparent;
 }
 
 .card__like-button_liked:hover{
   background-image: url("../icons/Like-icon-liked-hover.svg");
+  background-color: transparent;
 }
 
 .card__delete-btn {

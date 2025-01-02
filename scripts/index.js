@@ -36,16 +36,16 @@ const addCardModal = document.querySelector("#add-card-modal");
 const previewModal = document.querySelector("#preview-modal");
 const previewImage = previewModal.querySelector(".modal__image");
 const previewCaption = previewModal.querySelector(".modal__caption");
-const previewCloseBtn = previewModal.querySelector(".modal__close_type_preview"); // Actualizado
+
+// Botones de cierre universales
+const closeButtons = document.querySelectorAll(".modal__close-btn");
 
 // Botones
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const addCardButton = document.querySelector(".profile__add-btn");
-const editCloseButton = editModal.querySelector(".modal__close-btn");
-const addCardCloseButton = addCardModal.querySelector(".modal__close-btn");
 
 // Formularios y entradas
-const editForm = editModal.querySelector("#modal__form");
+const editForm = document.querySelector("#modal__form");
 const addCardForm = document.querySelector("#add-card-form");
 const profileNameElement = document.querySelector(".profile__name");
 const profileDescriptionElement = document.querySelector(".profile__description");
@@ -58,29 +58,29 @@ const cardLinkInput = document.querySelector("#add-card-link-input");
 const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".cards__list");
 
-// Función para abrir y cerrar modal con transiciones suaves
+// Función para abrir modal
 function openModal(modal) {
-  modal.style.visibility = "visible";
   modal.classList.add("modal_opened");
 }
 
+// Función para cerrar modal
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  setTimeout(() => {
-    modal.style.visibility = "hidden";
-  }, 400); // Ajustar este tiempo al definido en CSS
 }
 
-// Función para abrir el Preview Modal
+// Asignar eventos universales a botones de cierre
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+});
+
+// Función para abrir el modal de vista previa
 function openPreviewModal(imageLink, imageCaption) {
-  previewImage.src = imageLink; // Actualiza la imagen
-  previewImage.alt = imageCaption; // Actualiza el texto alternativo
-  previewCaption.textContent = imageCaption; // Actualiza el caption
-  openModal(previewModal); // Abre el modal
+  previewImage.src = imageLink;
+  previewImage.alt = imageCaption;
+  previewCaption.textContent = imageCaption;
+  openModal(previewModal);
 }
-
-// Listener para cerrar el Preview Modal
-previewCloseBtn.addEventListener("click", () => closeModal(previewModal));
 
 // Función para crear una tarjeta
 function getCardElement(data) {
@@ -98,31 +98,32 @@ function getCardElement(data) {
   cardImage.alt = data.name;
   cardTitle.textContent = data.name;
 
-  // Para abrir el Preview Modal al hacer clic en la imagen
+  // Abrir modal de vista previa al hacer clic en la imagen
   cardImage.addEventListener("click", () => {
     openPreviewModal(data.link, data.name);
   });
 
-  // Para dar Like
+  // Marcar como favorito
   cardlikeBtn.addEventListener("click", () => {
-    cardlikeBtn.classList.toggle("card__like-button_liked"); // Cambiar estado visual
-    console.log(`${data.name} fue ${cardlikeBtn.classList.contains("card__like-button_liked") ? "marcado como favorito" : "desmarcado como favorito"}`);
+    cardlikeBtn.classList.toggle("card__like-button_liked");
   });
 
-  // Para eliminar un Card
+  // Eliminar post
   cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove(); // Elimina la tarjeta del DOM
-    console.log(`${data.name} fue eliminado`);
+    cardElement.remove();
   });
 
   return cardElement;
 }
 
-// Renderizar tarjetas iniciales
-initialCards.forEach((card) => {
-  const cardElement = getCardElement(card);
-  cardList.appendChild(cardElement);
-});
+// Función para renderizar post
+function renderCard(cardData, method = "prepend") {
+  const cardElement = getCardElement(cardData);
+  cardList[method](cardElement);
+}
+
+// Renderizar post iniciales
+initialCards.forEach((card) => renderCard(card, "append"));
 
 // Eventos para editar perfil
 profileEditButton.addEventListener("click", () => {
@@ -131,8 +132,6 @@ profileEditButton.addEventListener("click", () => {
   openModal(editModal);
 });
 
-editCloseButton.addEventListener("click", () => closeModal(editModal));
-
 editForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   profileNameElement.textContent = editNameInput.value;
@@ -140,10 +139,8 @@ editForm.addEventListener("submit", (evt) => {
   closeModal(editModal);
 });
 
-// Eventos para agregar tarjeta
+// Evento para agregar tarjeta
 addCardButton.addEventListener("click", () => openModal(addCardModal));
-
-addCardCloseButton.addEventListener("click", () => closeModal(addCardModal));
 
 addCardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -151,9 +148,7 @@ addCardForm.addEventListener("submit", (evt) => {
     name: cardNameInput.value,
     link: cardLinkInput.value,
   };
-  const cardElement = getCardElement(cardData);
-  cardList.prepend(cardElement);
-  cardNameInput.value = "";
-  cardLinkInput.value = "";
+  renderCard(cardData);
+  addCardForm.reset();
   closeModal(addCardModal);
 });
