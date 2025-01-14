@@ -67,16 +67,18 @@
       <div class="modal__container">
         <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
         <h2 class="modal__title">Edit Profile</h2>
-        <form id="modal__form">
+        <form id="modal__form" novalidate>
           <label for="profile-name-input" class="modal__label">
             Name
-            <input id="profile-name-input" type="text" class="modal__input" placeholder="Type your name" aria-label="Edit profile name">
+            <input id="profile-name-input" type="text" class="modal__input" placeholder="Type your name" required minlength="2" maxlength="40" aria-label="Edit profile name">
+            <span class="modal__error"></span>
           </label>
           <label for="profile-description-input" class="modal__label">
             Description
-            <input id="profile-description-input" type="text" class="modal__input" placeholder="Describe yourself" aria-label="Edit profile description">
+            <input id="profile-description-input" type="text" class="modal__input" placeholder="Describe yourself" required minlength="2" maxlength="200" aria-label="Edit profile description">
+            <span class="modal__error"></span>
           </label>
-          <button type="submit" class="modal__submit-btn" aria-label="Save profile changes">Save</button>
+          <button type="submit" class="modal__submit-btn modal__submit-btn_disabled" aria-label="Save profile changes">Save</button>
         </form>
       </div>
     </div>
@@ -86,16 +88,18 @@
       <div class="modal__container">
         <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
         <h2 class="modal__title">New Post</h2>
-        <form id="add-card-form">
+        <form id="modal__form" novalidate>
           <label for="add-card-link-input" class="modal__label">
             Image Link
-            <input id="add-card-link-input" type="url" class="modal__input" placeholder="Paste a link to the picture" aria-label="Image link">
+            <input id="add-card-link-input" type="url" class="modal__input" placeholder="Paste a link to the picture" required pattern="https?://.+" aria-label="Image link">
+            <span class="modal__error"></span>
           </label>
           <label for="add-card-caption-input" class="modal__label">
             Caption
-            <input id="add-card-caption-input" type="text" class="modal__input" placeholder="Type your caption" aria-label="Caption">
+            <input id="add-card-caption-input" type="text" class="modal__input" placeholder="Type your caption" required minlength="2" maxlength="30" aria-label="Caption">
+            <span class="modal__error"></span>
           </label>
-          <button type="submit" class="modal__submit-btn" aria-label="Add new post">Save</button>
+          <button type="submit" class="modal__submit-btn modal__submit-btn_disabled" aria-label="Add new post">Save</button>
         </form>
       </div>
     </div>
@@ -111,5 +115,6 @@
   </div>
 
   <script defer src="./scripts/index.js"></script>
+  <script defer src="./scripts/validation.js"></script>
 </body>
 </html>
