@@ -1,3 +1,5 @@
+
+
 // Tarjetas iniciales
 const initialCards = [
   { name: "Val Thorens", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg" },
@@ -30,24 +32,6 @@ const cardLinkInput = document.querySelector("#add-card-link-input");
 const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".cards__list");
 
-// Función para limpiar errores del formulario
-function clearFormErrors(form) {
-  const inputs = form.querySelectorAll(".modal__input");
-  inputs.forEach((input) => {
-    const errorElement = input.closest("label").querySelector(".modal__error");
-    if (errorElement) {
-      errorElement.textContent = "";
-      errorElement.classList.remove("modal__error_visible");
-    }
-  });
-
-  const submitButton = form.querySelector(".modal__submit-btn");
-  if (submitButton) {
-    submitButton.disabled = true;
-    submitButton.classList.add("modal__submit-btn_disabled");
-  }
-}
-
 // Función para abrir un modal
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -59,7 +43,6 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeKey);
 
-  // Remover el foco del botón que abrió el modal
   document.activeElement.blur();
 }
 
@@ -75,6 +58,15 @@ function handleEscapeKey(event) {
 document.querySelectorAll(".modal__close-btn").forEach((button) => {
   const modal = button.closest(".modal");
   button.addEventListener("click", () => closeModal(modal));
+});
+
+//Cerrar modal al hacer click en overlay
+document.querySelectorAll(".modal").forEach((modal) => {
+  modal.addEventListener("mousedown", (event) => {
+    if (event.target === modal) {
+      closeModal(modal);
+    }
+  });
 });
 
 // Crear una nueva tarjeta
@@ -113,7 +105,6 @@ initialCards.forEach((card) => cardList.prepend(getCardElement(card)));
 profileEditButton.addEventListener("click", () => {
   editNameInput.value = profileNameElement.textContent;
   editDescriptionInput.value = profileDescriptionElement.textContent;
-  clearFormErrors(editForm);
   openModal(editModal);
 });
 
@@ -126,7 +117,6 @@ editForm.addEventListener("submit", (evt) => {
 
 // Agregar nueva tarjeta
 addCardButton.addEventListener("click", () => {
-  clearFormErrors(addCardForm);
   openModal(addCardModal);
 });
 
@@ -135,5 +125,13 @@ addCardForm.addEventListener("submit", (evt) => {
   const cardData = { name: cardNameInput.value, link: cardLinkInput.value };
   cardList.prepend(getCardElement(cardData));
   addCardForm.reset();
+  resetValidation(addCardForm, {
+    inputSelector: ".modal__input",
+    submitButtonSelector: ".modal__submit-btn",
+    inactiveButtonClass: "modal__submit-btn_disabled",
+    errorClass: "modal__error_visible",
+    errorSelector: ".modal__error",
+  });
   closeModal(addCardModal);
 });
+

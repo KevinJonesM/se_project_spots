@@ -104,7 +104,7 @@
   opacity: 1;
 }
 
-.modal__close_type_preview {
+.modal__close-btn_type_preview {
   background-image: url("../icons/Close-white-Icon.svg");
   background-color: transparent;
   position: absolute;
@@ -119,7 +119,7 @@
   cursor: pointer;
 }
 
-.modal__close_type_preview:hover {
+.modal__close-btn_type_preview:hover {
   opacity: 0.8;
   background-image: url("../icons/Close-white-icon-hover.svg");
 }

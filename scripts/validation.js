@@ -1,5 +1,4 @@
 // Validación y comportamiento de formularios para el proyecto
-
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector);
   forms.forEach((form) => {
@@ -23,7 +22,6 @@ function setEventListeners(form, config) {
   });
 
   form.addEventListener("submit", (event) => {
-    // Evita el envío si el formulario no es válido
     if (!form.checkValidity()) {
       event.preventDefault();
       inputs.forEach((input) => validateInput(input, config));
@@ -66,6 +64,23 @@ function toggleButtonState(inputs, button, config) {
   }
 }
 
+// Función para resetear la validación de un formulario
+function resetValidation(form, config) {
+  const inputs = form.querySelectorAll(config.inputSelector);
+  inputs.forEach((input) => {
+    const errorElement = input.closest("label").querySelector(config.errorSelector);
+    if (errorElement) {
+      errorElement.textContent = "";
+      errorElement.classList.remove(config.errorClass);
+    }
+  });
+
+  const submitButton = form.querySelector(config.submitButtonSelector);
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.classList.add(config.inactiveButtonClass);
+  }
+}
 
 // Inicializa la validación cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", () => {
@@ -80,3 +95,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   enableValidation(validationConfig);
 });
+
