@@ -1,4 +1,3 @@
-// Validación y comportamiento de formularios para el proyecto
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector);
   forms.forEach((form) => {
@@ -6,12 +5,10 @@ function enableValidation(config) {
   });
 }
 
-// Establece los escuchadores de eventos en los formularios
 function setEventListeners(form, config) {
   const inputs = form.querySelectorAll(config.inputSelector);
   const submitButton = form.querySelector(config.submitButtonSelector);
 
-  // Alterna el estado del botón de envío
   toggleButtonState(inputs, submitButton, config);
 
   inputs.forEach((input) => {
@@ -20,39 +17,29 @@ function setEventListeners(form, config) {
       toggleButtonState(inputs, submitButton, config);
     });
   });
-
-  form.addEventListener("submit", (event) => {
-    if (!form.checkValidity()) {
-      event.preventDefault();
-      inputs.forEach((input) => validateInput(input, config));
-    }
-  });
 }
 
-// Valida un campo de entrada específico
 function validateInput(input, config) {
   const errorElement = input.closest("label").querySelector(config.errorSelector);
 
   if (!input.validity.valid) {
     showInputError(input, errorElement, config);
   } else {
-    hideInputError(input, errorElement, config);
+    hideInputError(input, config);
   }
 }
 
-// Muestra el mensaje de error para un campo inválido
 function showInputError(input, errorElement, config) {
   errorElement.textContent = input.validationMessage;
   errorElement.classList.add(config.errorClass);
 }
 
-// Oculta el mensaje de error para un campo válido
-function hideInputError(input, errorElement, config) {
+function hideInputError(input, config) {
+  const errorElement = input.closest("label").querySelector(config.errorSelector);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorClass);
 }
 
-// Alterna el estado del botón de envío basado en la validez del formulario
 function toggleButtonState(inputs, button, config) {
   const isValid = Array.from(inputs).every((input) => input.validity.valid);
   if (isValid) {
@@ -64,35 +51,12 @@ function toggleButtonState(inputs, button, config) {
   }
 }
 
-// Función para resetear la validación de un formulario
 function resetValidation(form, config) {
   const inputs = form.querySelectorAll(config.inputSelector);
-  inputs.forEach((input) => {
-    const errorElement = input.closest("label").querySelector(config.errorSelector);
-    if (errorElement) {
-      errorElement.textContent = "";
-      errorElement.classList.remove(config.errorClass);
-    }
-  });
-
-  const submitButton = form.querySelector(config.submitButtonSelector);
-  if (submitButton) {
-    submitButton.disabled = true;
-    submitButton.classList.add(config.inactiveButtonClass);
-  }
+  inputs.forEach((input) => hideInputError(input, config));
+  toggleButtonState(inputs, form.querySelector(config.submitButtonSelector), config);
 }
 
-// Inicializa la validación cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", () => {
-  const validationConfig = {
-    formSelector: "form",
-    inputSelector: ".modal__input",
-    submitButtonSelector: ".modal__submit-btn",
-    inactiveButtonClass: "modal__submit-btn_disabled",
-    errorClass: "modal__error_visible",
-    errorSelector: ".modal__error",
-  };
-
   enableValidation(validationConfig);
 });
-
