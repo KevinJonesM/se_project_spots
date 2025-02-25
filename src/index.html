@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Spots App" />
+  <meta name="author" content="Kevin Jones" />
+  <meta name="keywords" content="social media, pictures, images, travel, spots, cozy, photography, sharing, exploration, destinations, adventure, lifestyle, memories, popular places, outdoor photography, cityscapes, landmarks, travel blog, influencers, scenic views, vacation, wanderlust, digital album, friends, photo sharing, community, followers, scenic, trip planning, explore, discover, photo journal, bucket list, mobile photography" />
+
+  <title>Spots</title>
+  <link rel="icon" href="<%= require('./images/spots-favicon.ico') %>" type="image/x-icon">
+
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Encabezado Logo Spots -->
+    <header class="header">
+      <img src="<%= require('./images/Logo.svg') %>" alt="Spots Logo" class="header__logo">
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="content">
+
+      <!-- Perfil -->
+      <section class="profile page__section">
+        <img src="<%= require('./images/avatar.jpg') %>" alt="Profile Avatar" class="profile__avatar">
+        <div class="profile__column">
+          <h1 class="profile__name">Bessie Coleman</h1>
+          <p class="profile__description">Civil Aviator</p>
+          <button type="button" class="profile__edit-btn" aria-label="Edit Profile">
+            <img src="<%= require('./images/pencil.svg') %>" alt="Edit Profile"> Edit Profile
+          </button>
+        </div>
+        <button type="button" class="profile__add-btn" aria-label="Add New Post">
+          <img src="<%= require('./images/plus.svg') %>" alt="New Post"> New Post
+        </button>
+      </section>
+
+      <!-- Publicaciones -->
+      <section class="cards">
+        <ul class="cards__list">
+          <template id="card-template">
+            <li class="card">
+              <img src="" alt="" class="card__image" aria-label="Open image preview">
+              <div class="card__content">
+                <h2 class="card__title"></h2>
+                <button type="button" class="card__like-btn" aria-label="Like card"></button>
+              </div>
+              <button type="button" class="card__delete-btn" aria-label="Delete card"></button>
+            </li>
+          </template>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+      <p class="footer__copyright">2024 &copy; Spots</p>
+    </footer>
+
+    <!-- Modal: Editar Perfil -->
+    <div class="modal" id="edit-profile-modal" aria-label="Edit Profile Modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
+        <h2 class="modal__title">Edit Profile</h2>
+        <form id="modal__form" novalidate>
+          <label for="profile-name-input" class="modal__label">
+            Name
+            <input id="profile-name-input" type="text" class="modal__input" placeholder="Type your name" required minlength="2" maxlength="40" aria-label="Edit profile name">
+            <span class="modal__error"></span>
+          </label>
+          <label for="profile-description-input" class="modal__label">
+            Description
+            <input id="profile-description-input" type="text" class="modal__input" placeholder="Describe yourself" required minlength="2" maxlength="200" aria-label="Edit profile description">
+            <span class="modal__error"></span>
+          </label>
+          <button type="submit" class="modal__submit-btn modal__submit-btn_disabled" aria-label="Save profile changes">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Agregar un Post -->
+    <div class="modal" id="add-card-modal" aria-label="New Post Modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
+        <h2 class="modal__title">New Post</h2>
+        <form id="add-card-form" novalidate>
+          <label for="add-card-link-input" class="modal__label">
+            Image Link
+            <input id="add-card-link-input" type="url" class="modal__input" placeholder="Paste a link to the picture" required pattern="https?://.+" aria-label="Image link">
+            <span class="modal__error"></span>
+          </label>
+          <label for="add-card-caption-input" class="modal__label">
+            Caption
+            <input id="add-card-caption-input" type="text" class="modal__input" placeholder="Type your caption" required minlength="2" maxlength="30" aria-label="Caption">
+            <span class="modal__error"></span>
+          </label>
+          <button type="submit" class="modal__submit-btn modal__submit-btn_disabled" aria-label="Add new post">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Vista Previa de la Imagen -->
+    <div class="modal modal_preview" id="preview-modal" aria-label="Preview Picture Modal">
+      <div class="modal__container modal__container_type_preview">
+        <button type="button" class="modal__close-btn modal__close-btn_type_preview" aria-label="Close modal"></button>
+        <img src="#" alt="Preview" class="modal__image">
+        <p class="modal__caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <script defer type="module" src="./index.js"></script>
+
+</body>
+</html>
