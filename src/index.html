@@ -9,41 +9,44 @@
 
   <title>Spots</title>
   <link rel="icon" href="<%= require('./images/spots-favicon.ico') %>" type="image/x-icon">
-
 </head>
 
 <body>
   <div class="page">
 
-    <!-- Encabezado Logo Spots -->
+    <!-- Header -->
     <header class="header">
       <img src="<%= require('./images/Logo.svg') %>" alt="Spots Logo" class="header__logo">
     </header>
 
-    <!-- Contenido Principal -->
+    <!-- Main Content -->
     <main class="content">
-
-      <!-- Perfil -->
+      <!-- Profile Section -->
       <section class="profile page__section">
-        <img src="<%= require('./images/avatar.jpg') %>" alt="Profile Avatar" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <button class="profile__avatar-btn" aria-label="Edit Avatar">
+            <img src="<%= require('./images/edit-avatar.svg') %>" alt="Edit Avatar Icon" class="profile__avatar-icon">
+          </button>
+          <img src="<%= require('./images/avatar.jpg') %>" alt="Profile Avatar" class="profile__avatar">
+        </div>
         <div class="profile__column">
           <h1 class="profile__name">Bessie Coleman</h1>
           <p class="profile__description">Civil Aviator</p>
           <button type="button" class="profile__edit-btn" aria-label="Edit Profile">
-            <img src="<%= require('./images/pencil.svg') %>" alt="Edit Profile"> Edit Profile
+            <img src="<%= require('./images/pencil.svg') %>" alt="Edit Profile Icon"> Edit Profile
           </button>
         </div>
         <button type="button" class="profile__add-btn" aria-label="Add New Post">
-          <img src="<%= require('./images/plus.svg') %>" alt="New Post"> New Post
+          <img src="<%= require('./images/plus.svg') %>" alt="New Post Icon"> New Post
         </button>
       </section>
 
-      <!-- Publicaciones -->
+      <!-- Cards Section -->
       <section class="cards">
         <ul class="cards__list">
           <template id="card-template">
             <li class="card">
-              <img src="" alt="" class="card__image" aria-label="Open image preview">
+              <img src="" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title"></h2>
                 <button type="button" class="card__like-btn" aria-label="Like card"></button>
@@ -55,12 +58,12 @@
       </section>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Footer -->
     <footer class="footer">
       <p class="footer__copyright">2024 &copy; Spots</p>
     </footer>
 
-    <!-- Modal: Editar Perfil -->
+    <!-- Modal: Edit Profile -->
     <div class="modal" id="edit-profile-modal" aria-label="Edit Profile Modal">
       <div class="modal__container">
         <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
@@ -81,12 +84,12 @@
       </div>
     </div>
 
-    <!-- Modal: Agregar un Post -->
+    <!-- Modal: Add New Post -->
     <div class="modal" id="add-card-modal" aria-label="New Post Modal">
       <div class="modal__container">
         <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
         <h2 class="modal__title">New Post</h2>
-        <form id="add-card-form" novalidate>
+        <form id="modal__form" novalidate>
           <label for="add-card-link-input" class="modal__label">
             Image Link
             <input id="add-card-link-input" type="url" class="modal__input" placeholder="Paste a link to the picture" required pattern="https?://.+" aria-label="Image link">
@@ -102,7 +105,7 @@
       </div>
     </div>
 
-    <!-- Modal: Vista Previa de la Imagen -->
+    <!-- Modal: Image Preview -->
     <div class="modal modal_preview" id="preview-modal" aria-label="Preview Picture Modal">
       <div class="modal__container modal__container_type_preview">
         <button type="button" class="modal__close-btn modal__close-btn_type_preview" aria-label="Close modal"></button>
@@ -112,7 +115,38 @@
     </div>
   </div>
 
-  <script defer type="module" src="./index.js"></script>
+    <!-- Modal: Delete Post Confirmation -->
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container modal__container_type_delete">
+        <button type="button" class="modal__close-btn modal__close-btn_type_preview" aria-label="Close modal"></button>
+        <h2 class="modal__title modal__title--delete">Are you sure you want to delete this image?</h2>
+        <form class="modal__form"id="delete-card-form">
+          <div class="modal__btn-container">
+          <button type="submit" class="modal__submit-btn modal__submit-btn--delete">Delete</button>
+          <button type="button" class="modal__submit-btn modal__submit-btn--cancel">Cancel</button>
+        </div>
+        </form>
+      </div>
+    </div>
 
+    <!-- Modal: Edit Avatar -->
+    <div class="modal" id="edit-avatar-modal" role="dialog" aria-modal="true" aria-labelledby="edit-avatar-title">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal">
+        </button>
+        <h2 id="edit-avatar-title" class="modal__title">Edit Profile Avatar</h2>
+        <form id="edit-avatar-form" novalidate>
+          <label for="edit-avatar-link-input" class="modal__label">
+            Image Link
+            <input id="edit-avatar-link-input" type="url" class="modal__input" required pattern="https?://.+" aria-label="Image link to avatar">
+            <span class="modal__error"></span>
+          </label>
+          <button type="submit" class="modal__submit-btn modal__submit-btn_disabled">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <script defer type="module" src="./index.js"></script>
+  </div>
 </body>
 </html>
