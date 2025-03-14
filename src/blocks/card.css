@@ -38,7 +38,7 @@
 
 .card__like-btn {
   border: none;
-  background-image: url(../images/heart.svg);
+  background-image: url('../images/heart.svg');
   background-color: transparent;
   opacity: 40%;
   width: 23px;
@@ -53,7 +53,7 @@
 }
 
 .card__like-button_liked {
-  background-image: url("../images/Like-icon-liked.svg");
+  background-image: url('../images/Like-icon-liked.svg');
   opacity: 1;
   background-color: transparent;
 }
